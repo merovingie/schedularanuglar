@@ -15,8 +15,4 @@ export class UserService {
     return this.http.post(this.baseUrl + 'authenticate/', userData);
   }
 
-  registerUser(userData: any): Observable<any> {
-    return this.http.post(this.baseUrl + 'users/', userData);
-  }
-
 }
