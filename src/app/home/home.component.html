@@ -1,1 +1,48 @@
-<button mat-raised-button color="accent">get id 1</button>
+<p>
+    Welcome {{ account.username }}
+</p>
+
+
+
+  
+
+<button mat-ripple mat-raised-button (click)="logoutClicked()"  id="logoutBtn" color="accent">Logout</button>
+
+<br>
+<br>
+  
+<button mat-raised-button color="primary" (click)="getids()">get all ids</button>
+
+<div *ngFor="let item of items;">
+    <h2>{{item.title}}</h2>
+    <h6>{{item.description}}</h6>
+    <h6>{{item.monthly}}</h6>
+    <h6>{{item.weekly}}</h6>
+    <h6>{{item.daily}}</h6>
+    <h6>{{item.yearly}}</h6>
+    <h6>{{item.timeNow}}</h6>
+    <h6>{{item.timeScheduled}}</h6>
+</div>
+
+<br>
+<br>
+
+<mat-form-field >
+    <input matInput placeholder="Id pls" (input)="onInputUpdate($event)"> 
+</mat-form-field>
+
+<br>
+<br>
+
+<button mat-raised-button color="primary" (click)="getid()">get cerain id</button>
+
+<div>
+    <h2>{{item1.title}}</h2>
+    <h6>{{item1.description}}</h6>
+    <h6>{{item1.monthly}}</h6>
+    <h6>{{item1.weekly}}</h6>
+    <h6>{{item1.daily}}</h6>
+    <h6>{{item1.yearly}}</h6>
+    <h6>{{item1.timeNow}}</h6>
+    <h6>{{item1.timeScheduled}}</h6>
+</div>
