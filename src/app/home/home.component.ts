@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { GlobalService } from '../services/global.service';
 import { Router } from '@angular/router';
 import { ItemService } from '../services/item.service';
-import { Item} from '../models/item';
+import { Item } from '../models/item';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
