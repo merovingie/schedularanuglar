@@ -1,22 +1,76 @@
 <p>
     Welcome {{ account.username }}
 </p>
+<div>
+    <button mat-ripple mat-raised-button (click)="logoutClicked()"  id="logoutBtn" color="accent">Logout</button>
+</div>
+<hr>
+<div>
+<button mat-mini-fab color="primary" (click)="postIdMenu()">+</button>
+</div>
+<p *ngIf="!postMenu; else postForm" >hi need to post to api database click the +</p>
+<ng-template #postForm>
+    <form (ngSubmit)="submitData()" #f="ngForm">
+    <hr>
+    <mat-form-field >
+        <input matInput placeholder="Title" ngModel name="title"> 
+    </mat-form-field>
+    <mat-form-field >
+        <input matInput placeholder="Time to Finish" ngModel name="time"> 
+    </mat-form-field>
+    <br>
+    <mat-form-field >
+            <textarea matInput placeholder="Description" ngModel name="description"></textarea> 
+    </mat-form-field>
+    <br>
+    <mat-button-toggle-group #group1="matButtonToggleGroup" ngModel name="severity">
+            <mat-button-toggle value="HIGH">
+              HIGH
+            </mat-button-toggle>
+            <mat-button-toggle value="MEDIUM">
+              MEDIUM
+            </mat-button-toggle>
+            <mat-button-toggle value="LOW">
+              LOW
+            </mat-button-toggle>
+    </mat-button-toggle-group>
+    <div class="example-selected-value">Selected value: {{group1.value}}</div>
+    <br>
+    <mat-button-toggle-group multiple #group2="matButtonToggleGroup" ngModel name="timeness">
+            <mat-button-toggle value="daily">
+              Daily
+            </mat-button-toggle>
+            <mat-button-toggle value="weekly">
+              Weekly
+            </mat-button-toggle>
+            <mat-button-toggle value="monthly">
+              Monthly
+            </mat-button-toggle>
+            <mat-button-toggle value="yearly">
+                Yearly
+            </mat-button-toggle>
+    </mat-button-toggle-group>
+    <div class="example-selected-value">Selected value: {{group2.value}}</div>
+    <button mat-raised-button color="primary" >Submit</button>
+</form  >      
+    
+                                
+    
+</ng-template>
 
-
-
+<hr>
   
-
-<button mat-ripple mat-raised-button (click)="logoutClicked()"  id="logoutBtn" color="accent">Logout</button>
 
 <br>
 <br>
-  
+<div>
 <button mat-raised-button color="primary" (click)="getids()">get all ids</button>
-
+</div>
 <div *ngFor="let item of items;">
     <h2>{{item.title}}</h2>
     <h6>{{item.description}}</h6>
     <h6>{{item.monthly}}</h6>
+    <h6>{{item.severity}}</h6>
     <h6>{{item.weekly}}</h6>
     <h6>{{item.daily}}</h6>
     <h6>{{item.yearly}}</h6>
@@ -27,22 +81,29 @@
 <br>
 <br>
 
-<mat-form-field >
+<div>
+
+<mat-form-field  appearance="outline" placeholder="ID">
+    <mat-label>ID Please</mat-label>
     <input matInput placeholder="Id pls" (input)="onInputUpdate($event)"> 
 </mat-form-field>
 
+</div>
 <br>
 <br>
-
+<div>
 <button mat-raised-button color="primary" (click)="getid()">get cerain id</button>
 
+</div>
+
 <div>
-    <h2>{{item1.title}}</h2>
-    <h6>{{item1.description}}</h6>
-    <h6>{{item1.monthly}}</h6>
-    <h6>{{item1.weekly}}</h6>
-    <h6>{{item1.daily}}</h6>
-    <h6>{{item1.yearly}}</h6>
-    <h6>{{item1.timeNow}}</h6>
-    <h6>{{item1.timeScheduled}}</h6>
+    <h2>{{item1?.title}}</h2>
+    <h6>{{item1?.description}}</h6>
+    <h6>{{item1?.monthly}}</h6>
+    <h6>{{item1?.severity}}</h6>
+    <h6>{{item1?.weekly}}</h6>
+    <h6>{{item1?.daily}}</h6>
+    <h6>{{item1?.yearly}}</h6>
+    <h6>{{item1?.timeNow}}</h6>
+    <h6>{{item1?.timeScheduled}}</h6>
 </div>

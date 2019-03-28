@@ -10,7 +10,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { FormsModule } from '@angular/forms';
+import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -41,6 +42,8 @@ import { GlobalService } from './services/global.service';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     AppRoutingModule,
+    FormsModule,
+    MatButtonToggleModule
     
   ],
   providers: [

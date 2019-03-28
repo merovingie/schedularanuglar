@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../models/user';
 import { Subscription } from 'rxjs/Subscription';
 import { GlobalService } from '../services/global.service';
 import { Router } from '@angular/router';
 import { ItemService } from '../services/item.service';
 import { Item } from '../models/item';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { from } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -14,12 +16,25 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  @ViewChild('f') itemForm: NgForm;
   account: User = new User();
   userSub: Subscription;
   items;
   item1;
-  id: number = 0;
+  // item2: Item;
+  id;
+  postMenu = false;
+  // itemInput: Item;
+  itemInput= {
+    title: '',
+    timeScheduled: new Date(),
+    description: '',
+    severity: '',
+    daily: false,
+    weekly: false,
+    monthly: false,
+    yearly: false,
+  };
 
 
   constructor(private global: GlobalService, private router: Router,
@@ -40,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
   onInputUpdate(event: Event){
-    this.id = event.target.value;
+    this.id = (<HTMLInputElement>event.target).value;
     console.log(this.id);
   }
 
@@ -65,6 +80,70 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+  postIdMenu(){
+    this.postMenu == true? this.postMenu = false : this.postMenu = true;
+    console.log(this.postMenu)
+  }
+  
+  submitData(){
+    this.itemInput.title = this.itemForm.value.title;
+    this.itemInput.description = this.itemForm.value.description;
+    this.itemInput.timeScheduled = new Date(this.itemForm.value.time);
+    this.itemInput.severity = this.itemForm.value.severity;
+    let arr = this.itemForm.value.timeness
+    console.log(arr);
+    for (var index of arr ){
+      console.log(index);
+      if( index == "yearly"){
+        this.itemInput.yearly = true;
+      }
+      if( index == "monthly"){
+        this.itemInput.monthly = true;
+      }
+      if( index == "weekly"){
+        this.itemInput.weekly = true;
+      }
+      if( index == "daily"){
+        this.itemInput.daily = true;
+      }  
+    };
+    
+    
+
+    console.log(this.itemForm);
+    console.log(this.itemForm.value.timeness);
+    console.log(this.itemInput.daily);
+    console.log(this.itemInput.weekly);
+    console.log(this.itemInput.monthly);
+    console.log(this.itemInput.yearly);
+    console.log(this.itemInput.severity)
+
+    // this.item2.title = this.itemInput.title;
+    // this.item2.description = this.itemInput.description;
+    // this.item2.severity = this.itemInput.severity;
+    // this.item2.timeScheduled =new Date(this.itemInput.timeScheduled);
+    // this.item2.yearly = this.itemInput.yearly;
+    // this.item2.monthly = this.itemInput.monthly;
+    // this.item2.weekly = this.itemInput.weekly;
+    // this.item2.daily = this.itemInput.daily;
+
+    
+
+    
+    this.itemService.addItem(this.itemInput).subscribe(
+      response => {
+        this.items.push(response);
+        // this.itemInput.reset();
+        
+      },
+      error => {
+        this.snackBar.open('Error adding Item', '', { duration: 3000 });
+      }
+    );
+  }
+
+
   
   logoutClicked() {
     this.global.me = new User();

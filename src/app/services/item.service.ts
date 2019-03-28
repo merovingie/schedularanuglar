@@ -21,6 +21,11 @@ export class ItemService {
     return this.http.get(this.baseUrl + 'Items/', this.getAuthHeaders());
   }
 
+  addItem(item): Observable<any> {
+    return this.http.post(this.baseUrl + 'Items/', item, this.getAuthHeaders());
+  }
+
+
   private getAuthHeaders() {
     const token = localStorage.getItem('token');
     const httpHeaders = new HttpHeaders(
