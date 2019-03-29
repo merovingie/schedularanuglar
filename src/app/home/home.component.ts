@@ -19,12 +19,12 @@ export class HomeComponent implements OnInit {
   @ViewChild('f') itemForm: NgForm;
   account: User = new User();
   userSub: Subscription;
-  items;
-  item1;
-  // item2: Item;
+  items = [];
+  item1 = {};
+  item2 = [];
+  Picks = [];
   id;
   postMenu = false;
-  // itemInput: Item;
   itemInput= {
     title: '',
     timeScheduled: new Date(),
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
     );
     if ( localStorage.getItem('token') && localStorage.getItem('account')) {
       this.global.me = JSON.parse(localStorage.getItem('account'));
-      // this.getid();
+      this.getPicks();
     } else {
       this.router.navigate(['/login']);
     }
@@ -80,6 +80,19 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+  getPicks(){
+    this.itemService.getPickz().subscribe(
+      response => {
+        this.Picks = response;
+        console.log(this.Picks);
+      },
+      error => {
+        this.snackBar.open('Error getting Picks', '', { duration: 3000 });
+      }
+    );
+  }
+  
 
   postIdMenu(){
     this.postMenu == true? this.postMenu = false : this.postMenu = true;
@@ -118,23 +131,11 @@ export class HomeComponent implements OnInit {
     console.log(this.itemInput.monthly);
     console.log(this.itemInput.yearly);
     console.log(this.itemInput.severity)
-
-    // this.item2.title = this.itemInput.title;
-    // this.item2.description = this.itemInput.description;
-    // this.item2.severity = this.itemInput.severity;
-    // this.item2.timeScheduled =new Date(this.itemInput.timeScheduled);
-    // this.item2.yearly = this.itemInput.yearly;
-    // this.item2.monthly = this.itemInput.monthly;
-    // this.item2.weekly = this.itemInput.weekly;
-    // this.item2.daily = this.itemInput.daily;
-
-    
-
     
     this.itemService.addItem(this.itemInput).subscribe(
       response => {
-        this.items.push(response);
-        // this.itemInput.reset();
+        this.item2.push(response);
+        this.itemForm.reset();
         
       },
       error => {
@@ -144,7 +145,6 @@ export class HomeComponent implements OnInit {
   }
 
 
-  
   logoutClicked() {
     this.global.me = new User();
     localStorage.removeItem('token');

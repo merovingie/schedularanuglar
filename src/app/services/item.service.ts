@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Item } from '../models/item';
+import { Pick } from '../models/Pick';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,10 @@ export class ItemService {
 
   addItem(item): Observable<any> {
     return this.http.post(this.baseUrl + 'Items/', item, this.getAuthHeaders());
+  }
+
+  getPickz(): Observable<any> {
+    return this.http.get(this.baseUrl + 'Picks/' , this.getAuthHeaders());
   }
 
 

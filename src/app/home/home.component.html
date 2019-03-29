@@ -7,8 +7,9 @@
 <hr>
 <div>
 <button mat-mini-fab color="primary" (click)="postIdMenu()">+</button>
+<button mat-ripple mat-raised-button color="primary">Randomize FOr Today</button>
 </div>
-<p *ngIf="!postMenu; else postForm" >hi need to post to api database click the +</p>
+<p *ngIf="!postMenu; else postForm" >hi need to post to api database click the +, And If u want to Make Picks For Study Today Click Randomize</p>
 <ng-template #postForm>
     <form (ngSubmit)="submitData()" #f="ngForm">
     <hr>
@@ -107,3 +108,35 @@
     <h6>{{item1?.timeNow}}</h6>
     <h6>{{item1?.timeScheduled}}</h6>
 </div>
+
+<mat-accordion *ngFor="let Pick of Picks;">
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          {{ Pick.dayDate }}       
+      </mat-panel-title>
+      <mat-panel-description>
+        Today WOrk {{panelOpenState ? 'open' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      <H2>
+        {{Pick.itemA}} High Severity
+        <button mat-button>Done</button>
+      </H2>
+      <br>
+      <H2>
+        {{Pick.itemB}} Medium Severity
+        <button mat-button>Done</button>
+      </H2>
+      <br>
+      <H2>
+        {{Pick.itemC}} Low Severity
+        <button mat-button>Done</button>
+      </H2>
+      <mat-card-actions>
+          <button mat-button>Done all</button>
+          <button mat-button>Delete</button>
+      </mat-card-actions>  
+  </mat-expansion-panel>
+</mat-accordion>
