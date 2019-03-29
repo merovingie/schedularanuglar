@@ -7,7 +7,7 @@
 <hr>
 <div>
 <button mat-mini-fab color="primary" (click)="postIdMenu()">+</button>
-<button mat-ripple mat-raised-button color="primary">Randomize FOr Today</button>
+<button mat-ripple mat-raised-button color="primary" (click)="randomizeWork()">Randomize FOr Today</button>
 </div>
 <p *ngIf="!postMenu; else postForm" >hi need to post to api database click the +, And If u want to Make Picks For Study Today Click Randomize</p>
 <ng-template #postForm>

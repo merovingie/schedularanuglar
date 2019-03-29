@@ -92,6 +92,17 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+  randomizeWork(){
+    this.itemService.randomize().subscribe(
+      response => {
+        this.snackBar.open('Working Perfectly', '', { duration: 3000 });
+      },
+      error => {
+        this.snackBar.open('Error Randomizing', '', { duration: 3000 });
+      }
+    );
+  }
   
 
   postIdMenu(){

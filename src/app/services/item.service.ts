@@ -30,6 +30,10 @@ export class ItemService {
     return this.http.get(this.baseUrl + 'Picks/' , this.getAuthHeaders());
   }
 
+  randomize(): Observable<any> {
+    return this.http.get(this.baseUrl + 'Randomize/' , this.getAuthHeaders());
+  }
+
 
   private getAuthHeaders() {
     const token = localStorage.getItem('token');
