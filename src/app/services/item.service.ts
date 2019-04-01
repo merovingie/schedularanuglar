@@ -31,7 +31,23 @@ export class ItemService {
   }
 
   randomize(): Observable<any> {
-    return this.http.get(this.baseUrl + 'Randomize/' , this.getAuthHeaders());
+    return this.http.get(this.baseUrl + 'Randomize/RandomAction/', this.getAuthHeaders());
+  }
+
+  deletePick(id: number): Observable<any> {
+    return this.http.delete(this.baseUrl + 'Picks/' + id + '/', this.getAuthHeaders());
+  }
+
+  updatePickA(id: number): Observable<any> {
+    return this.http.get(this.baseUrl + 'Picks/' + id + '/setA/', this.getAuthHeaders());
+  }
+  
+  updatePickB(id: number): Observable<any> {
+    return this.http.get(this.baseUrl + 'Picks/' + id + '/setB/', this.getAuthHeaders());
+  }
+
+  updatePickC(id: number): Observable<any> {
+    return this.http.get(this.baseUrl + 'Picks/' + id + '/setC/', this.getAuthHeaders());
   }
 
 

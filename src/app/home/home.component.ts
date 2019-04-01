@@ -23,8 +23,10 @@ export class HomeComponent implements OnInit {
   item1 = {};
   item2 = [];
   Picks = [];
+  Pick1 = {};
   id;
   postMenu = false;
+  randomizeMenu = false;
   itemInput= {
     title: '',
     timeScheduled: new Date(),
@@ -47,7 +49,7 @@ export class HomeComponent implements OnInit {
     );
     if ( localStorage.getItem('token') && localStorage.getItem('account')) {
       this.global.me = JSON.parse(localStorage.getItem('account'));
-      this.getPicks();
+      // this.getPicks();
     } else {
       this.router.navigate(['/login']);
     }
@@ -94,12 +96,70 @@ export class HomeComponent implements OnInit {
   }
 
   randomizeWork(){
+    // this.randomizeMenu = true
+    console.log(this.randomizeMenu)
     this.itemService.randomize().subscribe(
       response => {
+        this.getPicks();
         this.snackBar.open('Working Perfectly', '', { duration: 3000 });
       },
       error => {
         this.snackBar.open('Error Randomizing', '', { duration: 3000 });
+      }
+    );
+   
+
+  }
+
+
+  setDoneItemA(Pick){
+    console.log(Pick)
+    this.itemService.updatePickA(Pick).subscribe(
+      response => {
+        this.getPicks();
+        this.Pick1 = response;
+      },
+      error => {
+        this.snackBar.open('Error getting Items', '', { duration: 3000 });
+      }
+    );
+  }
+
+  setDoneItemB(Pick){
+    console.log(Pick)
+    this.itemService.updatePickB(Pick).subscribe(
+      response => {
+        this.getPicks();
+        this.Pick1 = response;
+      },
+      error => {
+        this.snackBar.open('Error getting Items', '', { duration: 3000 });
+      }
+    );
+  }
+
+  setDoneItemC(Pick){
+    console.log(Pick)
+    this.itemService.updatePickC(Pick).subscribe(
+      response => {
+        this.getPicks();
+        this.Pick1 = response;
+      },
+      error => {
+        this.snackBar.open('Error getting Items', '', { duration: 3000 });
+      }
+    );
+  }
+
+  Delete(Pick){
+    console.log(Pick)
+    this.itemService.deletePick(Pick).subscribe(
+      response => {
+        this.getPicks();
+        this.Pick1 = response;
+      },
+      error => {
+        this.snackBar.open('Error getting Items', '', { duration: 3000 });
       }
     );
   }
