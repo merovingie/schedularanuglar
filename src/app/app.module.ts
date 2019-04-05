@@ -15,7 +15,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 
-// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+//import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -48,6 +48,7 @@ import { GlobalService } from './services/global.service';
     MatButtonToggleModule,
     MatCardModule,
     MatExpansionModule,
+    
     
   ],
   providers: [

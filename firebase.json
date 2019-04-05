@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/SchedularFrontEnd",
+    "public": "dist/SchedularFrontEnd/",
     "ignore": [
       "firebase.json",
       "**/.*",
