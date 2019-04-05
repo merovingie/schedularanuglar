@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   account: User = new User();
   userSub: Subscription;
   items = [];
-  item1 = {};
+  item1 : any;
   item2 = [];
   Picks = [];
   Pick1 = {};
